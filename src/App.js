@@ -1,22 +1,26 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './components/home';
 import Dologin  from './components/login';
 import DoRegistration  from './components/registration';
 import { useState } from 'react';
 
 function App() {
 
-  const [token, setToken] = useState();
+  const [token, setToken] = useState('');
+
+  if(!token) {
+    return <Dologin setToken={setToken} />
+  }
+
   return (
     <div className="App">
-      <h1>Hedaer</h1>
+      <h1>Application</h1>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={!token && <Dologin />}>
+          <Route path="/" element={<Home />}>
           </Route>
-          <Route path="/registration" element={<DoRegistration />}>
-          </Route>       
-          </Routes>
+         </Routes>
       </BrowserRouter>
     </div>
   );
